@@ -4,6 +4,17 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/reg',
+    // webpack 提供的import函数来路由懒加载导入组件
+    // 路由懒加载，就是页面路由路径切换到/reg,才去加载对应的组件代码
+    // 好处：让首页加载文件体积更小，打开更快
+    component: () => import('@/views/register')
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/login')
+  }
 
 ]
 
