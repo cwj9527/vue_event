@@ -5,6 +5,10 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    redirect: '/login'
+  },
+  {
     path: '/reg',
     // webpack 提供的import函数来路由懒加载导入组件
     // 路由懒加载，就是页面路由路径切换到/reg,才去加载对应的组件代码
