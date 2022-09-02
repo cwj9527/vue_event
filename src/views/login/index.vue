@@ -28,7 +28,9 @@
 // 前端绑定数据对象“属性名”，可以直接给要调用的功能接口的“参数名” 一致
 // 好处：我们可以直接把前端对象（带着同名的属性和前端的值）发给后台
 import { loginAPI } from '@/api'
+import { mapMutations } from 'vuex'
 export default {
+
   name: 'my-login',
   data () {
     return {
@@ -59,6 +61,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['updateToken']),
     loginFn () {
       this.$refs.loginRef.validate(async valid => {
         if (valid) {
@@ -70,6 +73,7 @@ export default {
           if (res.code === 0) {
             // 成功
             this.$message.success(res.message)
+            this.updateToken(res.token)
           } else {
             this.$message.error(res.message)
           }
