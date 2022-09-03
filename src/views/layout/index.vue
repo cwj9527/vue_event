@@ -19,9 +19,9 @@
     </template>
     <el-menu-item index="1-1"><i class="el-icon-s-operation"></i>基本资料</el-menu-item>
     <el-menu-item index="1-2"><i class="el-icon-camera"></i>更换头像</el-menu-item>
-    <el-menu-item index="1-3"><i class="el-icon-kry"></i>重置密码</el-menu-item>
+    <el-menu-item index="1-3"><i class="el-icon-key"></i>重置密码</el-menu-item>
   </el-submenu>
-      <el-menu-item index="2"><i class="el-icon-switch-button"></i>退出</el-menu-item>
+      <el-menu-item index="2" @click="quitFn" ><i class="el-icon-switch-button"></i>退出</el-menu-item>
 </el-menu>
   </el-header>
   <el-container>
@@ -40,8 +40,33 @@
 </template>
 
 <script>
+// 经验：在组件标签上绑定的所有事件（包括原生事件的名字click,input等等）
+// 都是自定义事件，都需要组件内￥emit来触发才行
+// 万一组件内不支持这个原生事件名字
+// 解决：@事件名.native = "methods里方法名"
+// .native给组件内根标签，绑定这个原生的事件
 export default {
-  name: 'my-layout'
+  name: 'my-layout',
+  methods: {
+    // 退出登录点击事件
+    quitFn () {
+      // console.log(1)
+      this.$confirm('是否退出登录？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 确定
+        // 清除vuex
+        this.$store.commit('updateToken', '')
+        // 强制跳转登录页面
+        this.$router.push('/login')
+      }).catch(() => {
+        // 取消
+
+      })
+    }
+  }
 
 }
 </script>
