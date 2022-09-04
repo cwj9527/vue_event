@@ -1,7 +1,6 @@
 // 封装的是具体的接口请求方法
 // 注意：每个方法只负责请求一个url地址
 // 引入自定义axios函数
-import store from '@/store'
 import request from '@/utils/request'
 // 导出接口方法，为了在逻辑页面引入后调用
 // registerAPI(this.form)
@@ -49,22 +48,16 @@ export const loginAPI = ({ username, password }) => {
 // 获取用户信息函数处理方法
 export const getUserInfoAPI = () => {
   return request({
-    url: '/my/userinfo',
+    url: '/my/userinfo'
     // method不写默认就是'get'方式请求
     // 传参给后台：params(查询字符串query),data(请求体body),headers(请求头)
-    headers: {
-      // this.$store.state.token 这里this不是组件对象不能用this.$store拿到store对象
-      Authorization: store.state.token
 
-    }
   })
 }
 // 获取侧边栏的数据
 export const getMenusListAPI = () => {
   return request({
-    url: '/my/menus',
-    headers: {
-      Authorization: store.state.token
-    }
+    url: '/my/menus'
+
   })
 }
