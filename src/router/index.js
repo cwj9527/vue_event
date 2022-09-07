@@ -28,13 +28,30 @@ const router = new VueRouter({
   routes
 })
 
+// 无需登录可以访问的路由地址
+const whiteList = ['/login', '/reg'] // 白名单
 // 全局前置路由守卫
+// 浏览器第一次打开项目页面，会触发一次全局前置路由守卫函数
+// 有token就证明登录了，无token未登录
+// next()如果强制切换路由地址，会再次走路由守卫
 router.beforeEach((to, from, next) => {
   const token = store.state.token
-  if (token && !store.state.userInfo.username) {
-    store.dispatch('getUserInfoActions')
+  if (token) {
+    if (token && !store.state.userInfo.username) {
+      store.dispatch('getUserInfoActions')
+    }
+    next()
+  } else {
+    // 未登录
+    // 数组。includes(值)，作用：判断值是否在数组里出现过，出现过原地返回true
+    if (whiteList.includes(to.path)) {
+      // 未登录，可以访问的路由地址，则放行（路由全局前置守卫不会再次触发了，而是匹配路由表，让组件挂载）
+      next()
+    } else {
+    // next()强制切换到登录路径上
+      next('/login')
+    }
   }
-  next()
 })
 
 export default router
