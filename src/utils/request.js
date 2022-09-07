@@ -32,5 +32,21 @@ myAxios.interceptors.request.use(function (config) {
   // })
 }
 )
+
+// 定义响应拦截器
+myAxios.interceptors.response.use(function (response) {
+  // 响应状态码为 2xx 时触发成功的回调，形参中的response 是“成功的结果”
+  return response
+}, function (error) {
+  // 响应状态码不是 2xx 时触发失败的回调，形参中的 error 是“失败的结果”
+  if (error.response.status === 401) {
+    // 本次响应是token过期了
+    // 清除vuex里的一切，然后换回到登录页面（被动退出登录状态）
+    store.commit('updateToken', '')
+    store.commit('updateUserInfo', {})
+  }
+  return Promise.reject(error)
+}
+)
 // 导出axios自定义函数
 export default myAxios
