@@ -33,6 +33,7 @@
 
 <script>
 import { updateUserInfoAPI } from '@/api'
+
 export default {
   name: 'UserInfo',
   data () {
@@ -69,8 +70,7 @@ export default {
           // 更新用户信息成功，刷新 Vuex 中的数据
           this.$message.success('更新成功！')
           // 更新让vuex获取下最新的用户数据
-          this.$store.dispatch('initUserInfo')
-          console.log(res)
+          this.$store.dispatch('getUserInfoActions')
         } else {
           // 未通过校验
           return false

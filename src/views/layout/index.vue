@@ -31,7 +31,7 @@
       <div class="user-box">
         <img :src="user_pic" alt="" v-if="user_pic">
         <img src="../../assets/images/logo.png" alt="" v-else>
-        <span>欢迎 {{ nickname || username }}</span>
+        <span>欢迎 {{ nickname || username}}</span>
       </div>
       <!-- 侧边栏导航-菜单 -->
       <!--
