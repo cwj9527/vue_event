@@ -46,7 +46,7 @@
         如果无嵌套，直接写el-menu-item
        -->
       <el-menu
-      default-active="/home"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
@@ -76,7 +76,7 @@
     <el-container>
       <!-- 页面主体区域 -->
       <el-main>
-        Main.vue后台主页
+        <router-view></router-view>
       </el-main>
       <!-- 底部footer区域 -->
       <el-footer>@ www.itheima.com - 黑马程序员</el-footer>
