@@ -97,3 +97,10 @@ export const updatePwdAPI = ({ old_pwd, new_pwd, re_pwd }) => {
     }
   })
 }
+
+// 获取文章分类
+export const getArtCateListAPI = () => {
+  return request({
+    url: '/my/cate/list'
+  })
+}
